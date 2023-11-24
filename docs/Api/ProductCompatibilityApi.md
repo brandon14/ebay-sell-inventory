@@ -12,12 +12,12 @@ Method | HTTP request | Description
 ## `createOrReplaceProductCompatibility()`
 
 ```php
-createOrReplaceProductCompatibility($sku, $content_language, $compatibility): \eBay\Sell\Inventory\Model\BaseResponse
+createOrReplaceProductCompatibility($content_language, $sku, $content_type, $compatibility): \eBay\Sell\Inventory\Model\BaseResponse
 ```
 
 
 
-This call is used by the seller to create or replace a list of products that are compatible with the inventory item. The inventory item is identified with a SKU value in the URI. Product compatibility is currently only applicable to motor vehicle parts and accessory categories, but more categories may be supported in the future. In addition to the authorization header, which is required for all eBay REST API calls, the createOrReplaceProductCompatibility call also requires the Content-Language header, that sets the natural language that will be used in the field values of the request payload. For US English, the code value passed in this header should be en-US. To view other supported Content-Language values, and to read more about all supported HTTP headers for eBay REST API calls, see the HTTP request headers topic in the Using eBay RESTful APIs document.
+This call is used by the seller to create or replace a list of products that are compatible with the inventory item. The inventory item is identified with a SKU value in the URI. Product compatibility is currently only applicable to motor vehicle parts and accessory categories, but more categories may be supported in the future.<br><br><span class=\"tablenote\"><b>Note:</b> In addition to the <code>authorization</code> header, which is required for all Inventory API calls, this call also requires the <code>Content-Type</code> and <code>Content-Language</code> headers. See the <a href=\"/api-docs/sell/inventory/resources/inventory_item/product_compatibility/methods/createOrReplaceProductCompatibility#h3-request-headers\">HTTP request headers</a> for more information.</span>
 
 ### Example
 
@@ -36,12 +36,13 @@ $apiInstance = new eBay\Sell\Inventory\Api\ProductCompatibilityApi(
     new GuzzleHttp\Client(),
     $config
 );
+$content_language = 'content_language_example'; // string | This header sets the natural language that will be used in the field values of the request payload. For example, the value passed in this header should be <code>en-US</code> for English or <code>de-DE</code> for German. For more information on the Content-Language header, refer to <a href=\"/api-docs/static/rest-request-components.html#HTTP\" target=\"_blank \">HTTP request headers</a>.
 $sku = 'sku_example'; // string | A SKU (stock keeping unit) is an unique identifier defined by a seller for a product
-$content_language = 'content_language_example'; // string | This request header sets the natural language that will be provided in the field values of the request payload.
+$content_type = 'content_type_example'; // string | This header indicates the format of the request body provided by the client. Its value should be set to <b>application/json</b>. <br><br> For more information, refer to <a href=\"/api-docs/static/rest-request-components.html#HTTP\" target=\"_blank \">HTTP request headers</a>.
 $compatibility = new \eBay\Sell\Inventory\Model\Compatibility(); // \eBay\Sell\Inventory\Model\Compatibility | Details of the compatibility
 
 try {
-    $result = $apiInstance->createOrReplaceProductCompatibility($sku, $content_language, $compatibility);
+    $result = $apiInstance->createOrReplaceProductCompatibility($content_language, $sku, $content_type, $compatibility);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling ProductCompatibilityApi->createOrReplaceProductCompatibility: ', $e->getMessage(), PHP_EOL;
@@ -52,8 +53,9 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **content_language** | **string**| This header sets the natural language that will be used in the field values of the request payload. For example, the value passed in this header should be &lt;code&gt;en-US&lt;/code&gt; for English or &lt;code&gt;de-DE&lt;/code&gt; for German. For more information on the Content-Language header, refer to &lt;a href&#x3D;\&quot;/api-docs/static/rest-request-components.html#HTTP\&quot; target&#x3D;\&quot;_blank \&quot;&gt;HTTP request headers&lt;/a&gt;. |
  **sku** | **string**| A SKU (stock keeping unit) is an unique identifier defined by a seller for a product |
- **content_language** | **string**| This request header sets the natural language that will be provided in the field values of the request payload. |
+ **content_type** | **string**| This header indicates the format of the request body provided by the client. Its value should be set to &lt;b&gt;application/json&lt;/b&gt;. &lt;br&gt;&lt;br&gt; For more information, refer to &lt;a href&#x3D;\&quot;/api-docs/static/rest-request-components.html#HTTP\&quot; target&#x3D;\&quot;_blank \&quot;&gt;HTTP request headers&lt;/a&gt;. |
  **compatibility** | [**\eBay\Sell\Inventory\Model\Compatibility**](../Model/Compatibility.md)| Details of the compatibility |
 
 ### Return type
